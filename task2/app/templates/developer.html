@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width={device-width}, initial-scale=1.0">
+    <title>Developers</title>
+</head>
+<body>
+    <h2> about developer:</h2>
+        {% for item in developer %}
+        <p> username: {{item.username}}</p>
+        <p> first name: {{item.first_name}}</p>
+        <p> last name: {{item.last_name}}</p>
+        <h2>skills:</h2>
+        {% for skill in item.skills %}
+        <li>{{skill}}</li>
+        {% endfor %}
+        {% endfor %}
+</body>
+</html>
