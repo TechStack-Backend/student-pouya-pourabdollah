@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            padding: 20px 0;
+        }
+
+        ul {
+            list-style-type: none;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        li a:hover {
+            color: #007BFF;
+        }
+
+        .add-button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px 0;
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .add-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Projects</h1>
+    <ul>
+        {% for proj in projects %}
+          <li><a href="{% url 'project_detail' proj.id %}", style="color: black;">
+                    {{ proj.title }} - {{ proj.description }}
+            </a></li>
+        {% empty %}
+            <li>No developers found.</li>
+        {% endfor %}
+       <a href="{% url 'add_project' %}" class="add-button">Add project</a>
+    </ul>
+</body>
+</html>

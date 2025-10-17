@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ detail.first_name }} {{ detail.last_name }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            text-align: center;
+            color: #555;
+            margin: 5px 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #444;
+            margin-top: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        li:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        a.back-link {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px 0;
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        a.back-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ detail.first_name }} {{ detail.last_name }}</h1>
+    <p>Email: {{detail.email}}</p>
+    <p>Age: {{ detail.age }}</p>
+    <h2>Skills</h2>
+    <ul>
+        {% for skill in detail.skills %}
+            <li>{{ skill.title }} - {{ skill.description }}</li>
+        {% empty %}
+            <li>No skill found.</li>
+        {% endfor %}
+    </ul>
+    <h2>Projects</h2>
+    <ul>
+        {% for project in detail.projects %}
+            <li>{{ project.title }} - {{ project.description }}</li>
+        {% empty %}
+            <li>No projects found.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'home' %}" class="back-link">Back to home</a>
+
+</body>
+</html>
