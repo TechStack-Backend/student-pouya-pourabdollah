@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f6fa;
+            color: #2f3640;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #273c75;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            background-color: #dcdde1;
+            margin-bottom: 12px;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        li strong {
+            color: #2f3640;
+        }
+
+        a.button {
+            text-decoration: none;
+            display: inline-block;
+            background-color: #0984e3;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            margin-left: 8px;
+            transition: background-color 0.3s;
+        }
+
+        a.button:hover {
+            background-color: #74b9ff;
+        }
+
+        .create-link {
+            display: block;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .empty-message {
+            text-align: center;
+            font-style: italic;
+            color: #636e72;
+        }
+
+        .messages {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        .messages li {
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        .messages li.success { background-color: #2ecc71; }
+        .messages li.info    { background-color: #3498db; }
+        .messages li.warning { background-color: #f1c40f; color: #000; }
+        .messages li.danger  { background-color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <h1>Developer List</h1>
+
+        {% if developers %}
+            <ul>
+                {% for developer in developers %}
+                    <li>
+                        <strong>{{ developer.first_name }} {{ developer.last_name }}</strong> - {{ developer.email }}
+                        <a class="button" href="{% url 'developer-detail' developer.pk %}">View</a>
+                        <a class="button" href="{% url 'developer-update' developer.pk %}">Edit</a>
+                        <a class="button" href="{% url 'developer-delete' developer.pk %}">Delete</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="empty-message">There are no developers yet.</p>
+        {% endif %}
+
+        <div class="create-link">
+            <a class="button" href="{% url 'developer-create' %}">Create New Developer</a>
+        </div>
+    </div>
+</body>
+</html>

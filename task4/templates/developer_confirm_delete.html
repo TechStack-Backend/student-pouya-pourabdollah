@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Delete Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f6fa;
+            color: #2f3640;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #e84118;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        p {
+            margin-bottom: 25px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        strong {
+            color: #2f3640;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        button,
+        a.button {
+            text-decoration: none;
+            display: inline-block;
+            background-color: #e84118;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            margin: 0 10px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+
+        button:hover,
+        a.button:hover {
+            background-color: #ff6b6b;
+        }
+
+        a.button {
+            line-height: 24px;
+            background-color: #0984e3;
+        }
+
+        a.button:hover {
+            background-color: #74b9ff;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Confirm Delete</h1>
+
+        <p>Are you sure you want to delete <strong>{{ developer.first_name }} {{ developer.last_name }}</strong>?</p>
+
+        <div class="buttons">
+            <form method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Yes, Delete</button>
+            </form>
+            <a class="button" href="{% url 'developer-list' %}">Cancel</a>
+        </div>
+    </div>
+</body>
+</html>
