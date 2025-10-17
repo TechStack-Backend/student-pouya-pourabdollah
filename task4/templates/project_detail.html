@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f6fa;
+            color: #2f3640;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #273c75;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        strong {
+            color: #2f3640;
+        }
+
+        ul {
+            list-style: disc inside;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        a.button {
+            text-decoration: none;
+            display: inline-block;
+            background-color: #0984e3;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin: 0 5px;
+            transition: background-color 0.3s;
+        }
+
+        a.button:hover {
+            background-color: #74b9ff;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Project Details</h1>
+
+        <p><strong>Title:</strong> {{ project.title }}</p>
+        <p><strong>Description:</strong> {{ project.description }}</p>
+        
+        <p><strong>Developers:</strong></p>
+        <ul>
+            {% for developer in project.developers.all %}
+                <li>{{ developer.first_name }} {{ developer.last_name }}</li>
+            {% empty %}
+                <li>No developers assigned.</li>
+            {% endfor %}
+        </ul>
+
+        <div class="buttons">
+            <a class="button" href="{% url 'project-update' project.pk %}">Edit</a>
+            <a class="button" href="{% url 'project-delete' project.pk %}">Delete</a>
+            <a class="button" href="{% url 'project-list' %}">Back to List</a>
+        </div>
+    </div>
+</body>
+</html>
