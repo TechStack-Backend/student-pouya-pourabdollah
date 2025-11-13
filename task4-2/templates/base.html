@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}My App{% endblock %}</title>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+
+  <nav>
+    <a href="{% url 'developer_list' %}">Developers</a> |
+    <a href="{% url 'project_list' %}">Projects</a>
+  </nav>
+
+  <hr>
+
+  {% if messages %}
+    <div>
+      {% for message in messages %}
+        <div 
+          style="
+              padding: 10px;
+              margin: 10px 0;
+              border-radius: 6px;
+              color: black;
+              background-color: {% if message.tags == 'success' %}#d4f7d4
+                                {% elif message.tags == 'error' %}#f7d4d4
+                                {% else %}#eaeaea{% endif %};">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% block content %}{% endblock %}
+</body>
+</html>

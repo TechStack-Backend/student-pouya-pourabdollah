@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f6fa;
+            color: #2f3640;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #273c75;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .form-field {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button,
+        a.button {
+            text-decoration: none;
+            display: inline-block;
+            background-color: #0984e3;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin: 0 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 14px;
+        }
+
+        button:hover,
+        a.button:hover {
+            background-color: #74b9ff;
+        }
+
+        a.button {
+            line-height: 24px;
+        }
+
+        .error p {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .non-field-errors {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Developer Form</h1>
+
+        {% if error %}
+            <div class="error">
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="non-field-errors error">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for field in form %}
+                <div class="form-field">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="error">
+                            {% for error in field.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="buttons">
+                <button type="submit">Save</button>
+                <a class="button" href="{% url 'developer-list' %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
