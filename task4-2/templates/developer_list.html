@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Developers</h1>
+<a href="{% url 'developer_create' %}">➕ Add Developer</a>
+<ul>
+  {% for developer in object_list %}
+    <li>
+      <a href="{% url 'developer_detail' developer.pk %}">
+        {{ developer.name }}
+      </a>
+    </li>
+  {% empty %}
+    <li>No developers yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

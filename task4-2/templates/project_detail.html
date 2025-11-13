@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ object.title }}</h1>
+<p>{{ object.description }}</p>
+<p>Start date: {{ object.start_date }}</p>
+<p>End date: {{ object.end_date }}</p>
+
+<h3>Developers:</h3>
+<ul>
+  {% for dev in object.developers.all %}
+    <li>{{ dev.name }}</li>
+  {% empty %}
+    <li>No developers assigned.</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'project_update' object.pk %}">✏️ Edit</a> |
+<a href="{% url 'project_delete' object.pk %}">🗑️ Delete</a> |
+<a href="{% url 'project_list' %}">🔙 Back to list</a>
+{% endblock %}
